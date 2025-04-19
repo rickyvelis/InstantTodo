@@ -30,17 +30,23 @@
 
             }
         }
+        private List<TodoItem> GetUncompletedItems()
+        {
+            return TodoItems.Where(item => !item.IsDone).ToList();
+        }
 
         public string GetTasksPreview()
         {
             string preview = "";
 
-            if (TodoItems.Count > 0)
+            List<TodoItem> uncompletedItems = GetUncompletedItems();
+
+            if (uncompletedItems.Count > 0)
             {
 
                 int maxLength = 30;
                 int i = 0;
-                foreach (TodoItem item in TodoItems)
+                foreach (TodoItem item in uncompletedItems)
                 {
                     if (i != 0) preview += ", ";
                     preview += item.Title;
