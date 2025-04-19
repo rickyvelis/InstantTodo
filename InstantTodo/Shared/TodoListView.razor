@@ -4,7 +4,7 @@
     {
         <ul class="mb-3 list-group text-start shadow-lg">
             <li class="list-group-item container">
-                
+
                 @* Title *@
                 <div class="row g-1">
                     <div class="col-11 dropdown-center">
@@ -72,8 +72,10 @@
                 }
                 <li class="list-group-item container">
                     <div class="row">
-                        <div class="col">
-                            <input type="text" class="form-control shadow-lg" placeholder="What is there to do?" @bind=_titleNewTodoItem @bind:event="oninput" @onkeydown="OnEnter" @ref="_newTodoItemTextInput" />
+                        <div class="input-group d-flex w-100 justify-content-between">
+                            <input type="text" class="form-control shadow-lg" placeholder="What is there to do?" id="todoItemButton" @bind=_titleNewTodoItem @bind:event="oninput" @onkeydown="OnEnter" @ref="_newTodoItemTextInput" />
+                            <button type="button" class="btn btn-outline-secondary" aria-describedby="todoItemButton" @onclick="() => SubmitNewTodoItem()">➡</button>
+
                         </div>
                     </div>
                 </li>
@@ -111,7 +113,7 @@
     }
     else
     {
-       <span>TodoList is null</span> 
+        <span>TodoList is null</span> 
     }
 
 </div>
@@ -129,9 +131,17 @@
 
     private void OnEnter(KeyboardEventArgs e)
     {
-        if ((e.Code == "Enter" || e.Code == "NumpadEnter") && !string.IsNullOrEmpty(_titleNewTodoItem))
+        if (e.Code == "Enter" || e.Code == "NumpadEnter")
         {
-            OnSubmit.InvokeAsync( new(todoList.Id, _titleNewTodoItem) );
+            SubmitNewTodoItem();
+        }
+    }
+
+    private void SubmitNewTodoItem()
+    {
+        if (!string.IsNullOrEmpty(_titleNewTodoItem))
+        {
+            OnSubmit.InvokeAsync(new(todoList.Id, _titleNewTodoItem));
             _titleNewTodoItem = "";
         }
     }
