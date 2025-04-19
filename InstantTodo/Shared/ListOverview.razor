@@ -1,7 +1,7 @@
 ﻿<div class="col col-lg-3">
-    <div class="mb-3 border d-flex w-100 justify-content-between">
-        <input type="text" class="form-control" placeholder="Enter a title for a new list" @bind=titleNewList @bind:event="oninput" @onkeypress="OnEnter"/>
-        <button type="button" class="btn btn-secondary" @onclick="() => SubmitNewEmptyList()">➡</button>
+    <div class="input-group mb-3 d-flex justify-content-between">
+        <input type="text" class="form-control" placeholder="Enter a title for a new list" id="list-button" @bind=titleNewList @bind:event="oninput" @onkeypress="OnEnter" />
+        <button type="button" class="btn btn-outline-secondary" aria-describedby="list-button" @onclick="() => SubmitNewEmptyList()">➡</button>
     </div>
     @if (todoLists != null)
     {
