@@ -71,6 +71,7 @@ a, .btn-link {
     width: 8rem;
     height: 8rem;
     margin: 20vh auto 1rem auto;
+    animation: bob 0.5s infinite alternate;
 }
 
     .loading-progress circle {
@@ -82,7 +83,7 @@ a, .btn-link {
     }
 
         .loading-progress circle:last-child {
-            stroke: #1b6ec2;
+            stroke: #808080;
             stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
             transition: stroke-dasharray 0.05s ease-in-out;
         }
@@ -91,13 +92,21 @@ a, .btn-link {
     position: absolute;
     text-align: center;
     font-weight: bold;
+    font-style: italic;
     inset: calc(20vh + 3.25rem) 0 auto 0.2rem;
+    animation: bob 0.5s infinite alternate;
 }
-
-    .loading-progress-text:after {
-        content: var(--blazor-load-percentage-text, "Loading");
-    }
 
 code {
     color: #c02d76;
+}
+
+@keyframes bob {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-5px);
+    }
 }
