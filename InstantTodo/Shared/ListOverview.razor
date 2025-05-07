@@ -1,6 +1,6 @@
 ﻿<div class="col col-lg-3 col-12">
     <div class="input-group mb-3 d-flex justify-content-between">
-        <input type="text" class="form-control" placeholder="Enter a title for a new list" id="list-button" @bind=titleNewList @bind:event="oninput" @onkeypress="OnEnter" />
+        <input type="text" class="form-control" placeholder="Enter a title for a new list" id="list-button" @bind=titleNewList @bind:event="oninput" @onkeypress="OnEnter" @ref="_newListTextInput" />
         <button type="button" class="btn btn-outline-secondary" aria-describedby="list-button" @onclick="() => SubmitNewEmptyList()">➡</button>
     </div>
     @if (todoLists != null)
@@ -40,7 +40,7 @@
     [Parameter] public EventCallback<int> ClickedList { get; set; }
     [Parameter] public EventCallback<int> ClickedListDelete { get; set; }
 
-
+    private ElementReference _newListTextInput;
     public string titleNewList = "";
     const int DescPreviewLength = 30;
 
@@ -53,6 +53,7 @@
     }
 
     private void SubmitNewEmptyList(){
+        _newListTextInput.FocusAsync();
         if (!string.IsNullOrEmpty(titleNewList))
         {
             OnSubmit.InvokeAsync(titleNewList);

@@ -139,6 +139,7 @@
 
     private void SubmitNewTodoItem()
     {
+        _newTodoItemTextInput.FocusAsync();
         if (!string.IsNullOrEmpty(_titleNewTodoItem))
         {
             OnSubmit.InvokeAsync(new(todoList.Id, _titleNewTodoItem));
